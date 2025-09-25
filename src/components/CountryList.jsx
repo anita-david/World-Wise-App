@@ -4,7 +4,7 @@ import Message from "./Message";
 import styles from "./CountryList.module.css";
 function CountryList({ cities, isLoading }) {
   if (isLoading) return <Spinner />;
-  if (!cities.length)
+  if (!cities?.length)
     return (
       <Message message="Add your first country by clicking a city on the map!" />
     );
