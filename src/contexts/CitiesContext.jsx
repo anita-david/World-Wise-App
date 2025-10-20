@@ -47,11 +47,27 @@ try {
         const data = await res.json();
         setCities(cities => [...cities, data]);
       } catch {
-        ("Unknown Error");
+        ("Error creating city item");
       } finally {
         setIsLoading(false);
       }
   }
+
+   async function deleteCity(id) {
+try {
+        setIsLoading(true);
+         await fetch(`${BASE_URL}/cities/${id}`, {
+          method: 'DELETE',
+         
+        });
+        setCities(cities => cities.filter(city => city.id != id));
+      } catch {
+        ("Error deleting city item");
+      } finally {
+        setIsLoading(false);
+      }
+  }
+  
   return (
     <CitiesContext.Provider
       value={{
@@ -60,6 +76,7 @@ try {
         currentCity,
         getCity,
         createCity,
+        deleteCity,
       }}
     >
       {children}
